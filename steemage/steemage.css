@@ -1,0 +1,87 @@
+body {
+    font-family: "Agency FB", Helvetica, Arial, sans-serif;
+}
+
+#loader {
+    display: none;
+	position: fixed;
+	left: 50%;
+	top: 130px;
+    border: 3px solid #f3f3f3; /* Light grey */
+    border-top: 3px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 43px;
+    height: 43px;
+    animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#output {
+    width: 1200px;
+    margin: auto;
+    padding: 5px 40px;
+}
+
+#heading {
+    width: 290px;
+    margin: auto;
+    padding-bottom: 5px;
+    font-size: 3.5em;
+    letter-spacing: 0.2em;
+}
+
+.column {
+    float: left;
+    width: 33.33%;
+}
+
+.outerContainer {
+    width: auto;
+    margin: auto; 
+    /* margin-bottom: 20px; */
+    margin: 1px;
+    padding: 20px;
+    border: 1px solid lightgrey;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+
+img {
+    /* max-width: 640px; */
+    width: 100%;
+    height: auto;
+}
+
+.title {
+    color: rgb(61, 61, 61);
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif
+}
+
+a:link {
+    color: rgb(61, 61, 61);
+}
+
+a:visited {
+    color: rgb(104, 104, 104);
+}
+
+a:hover {
+    color: rgb(24, 24, 24);
+}
+
+@media screen and (max-width: 1400px) {
+    #output {
+        width: 900px;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    #output {
+        width: 600px;
+    }
+}
