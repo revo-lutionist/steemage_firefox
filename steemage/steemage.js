@@ -23,12 +23,30 @@ async function outputImages() {
 
         //exclude gifs, as they are more likely to be fillers
         if(!(objImg.image.includes(".gif") || objImg.image.includes(".GIF"))) {
-            createImage(objImg);
+            await createImage(objImg);
         }
     }
 }
 
+//load current image into a temporary image element to determine it's dimensions
+//Don't output images below a certain size
 function createImage(objImg) {
+    var img = new Image;
+
+    img.onload = function(){
+        var height = img.height;
+        var width = img.width;
+        if(height > 319) {
+            output(objImg);
+        }
+
+        return true;        
+    }
+
+    img.src = objImg.image;
+}
+
+function output(objImg) {
     mCount++;
     
     //create image and container elements and append to existing column divs in steemage.html
