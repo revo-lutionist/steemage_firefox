@@ -1,18 +1,28 @@
-const POST_LIMIT = 50;   //max 100;
+const POST_LIMIT = 5;   //max 100;
 
 mArrImages = [];
 mArrImageObjects = [];
 mUser = "";
+mHost = "";
 
 chrome.pageAction.onClicked.addListener((tab) => {
+    //zero out all previous storage
+    window.localStorage.removeItem("images");
+    window.localStorage.removeItem("host");
+    mArrImageObjects.length = 0;
+    mArrImages.length = 0;
+    
     //get username after '@'
     var user = tab.url.split("@")[1];
     mUser = user;
 
-    //zero out all previous storage
-    window.localStorage.removeItem("images");
-    mArrImageObjects.length = 0;
-    mArrImages.length = 0;
+    //get current steem front end that user is on
+    var host = tab.url.split("@")[0];
+    host = host.substring(0,host.length-1); //remove trailing slash
+    console.log("host:",host)
+
+    //store host for later use on steemage.html/js
+    window.localStorage.setItem("host", host);
 
     //create tab, navigate to page in extension for display.
     //page (steemage.js) waits for message from background.js when images stored in localStorage
@@ -72,9 +82,10 @@ function getImages(strUser, arrPosts) {
         } //If resteem (i.e. author != strUser), don't worry about getting images
     }
     
+    //store images for use on steemage.html/js
     window.localStorage.setItem("images", JSON.stringify(mArrImageObjects));
 
-    //image objects stored in localStorage, now send message to steemage.js to begin displaying them
+    //Now send message to steemage.js to begin displaying images
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
         chrome.tabs.sendMessage(tabs[0].id, {message: "ready"});
     });

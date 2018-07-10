@@ -21,7 +21,7 @@
             "128": "images/icon128.png"
           },
         "show_matches": ["https://steemit.com/@*", "https://steempeak.com/@*"],
-        "hide_matches": ["https://steemit.com/@*/", "https://steempeak.com/@*/"]
+        "hide_matches": ["https://steemit.com/@*/*", "https://steempeak.com/@*/*"]
     },
     "applications": {
         "gecko": {

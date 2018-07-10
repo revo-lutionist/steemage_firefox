@@ -1,4 +1,5 @@
 var mCount = 0;
+var mHost = window.localStorage.getItem("host");
 
 document.addEventListener("DOMContentLoaded", () => {
     //show loader gif
@@ -48,18 +49,33 @@ function createImage(objImg) {
 
 function output(objImg) {
     mCount++;
+    console.log(objImg.postURL)
     
     //create image and container elements and append to existing column divs in steemage.html
     var divOuterContainer = document.createElement("div");
     var anchor = document.createElement("a");
+    var anchorPost = document.createElement("a");
     var img = document.createElement("img");
-    img.setAttribute("src", objImg.image);
+    var imgPost = document.createElement("img");
+
+    img.setAttribute("src", "https://steemitimages.com/600x400/" + objImg.image);
 
     anchor.appendChild(img);
     anchor.setAttribute("href", objImg.image);
     anchor.setAttribute("target", "_blank");
+    //anchor.setAttribute("title", "View image");
 
+    //'show post' icon
+    anchorPost.setAttribute("id", "imgPost");
+    anchorPost.setAttribute("title", "Go to blog post");
+    anchorPost.setAttribute("href", mHost + objImg.postURL);
+    anchorPost.setAttribute("target", "_blank");
+    anchorPost.appendChild(imgPost);
+    imgPost.setAttribute("src", "/images/post.png");
+
+    //append anchors to div, then append to columns
     divOuterContainer.appendChild(anchor);
+    divOuterContainer.appendChild(anchorPost);
     document.getElementById(mCount.toString()).appendChild(divOuterContainer);  //this is a column
 
     divOuterContainer.classList.add("outerContainer");
